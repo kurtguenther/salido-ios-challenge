@@ -45,7 +45,7 @@
     NSInteger count = [items[product] integerValue];
     cell.nameLabel.text = [NSString stringWithFormat:@"(%ld) %@",(long)count,product.name];
     
-    
+    //Hook up the increment/decrement buttons
     cell.addButton.tag = indexPath.row;
     [cell.addButton addTarget:self action:@selector(addProduct:) forControlEvents:UIControlEventTouchUpInside];
     cell.subtractButton.tag = indexPath.row;

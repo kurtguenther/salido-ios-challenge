@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "ABCCart.h"
 
+/**
+ *  A simple In Memory representation of the Cart
+ *  Only persists as long as the application is running
+ */
 @interface ABCMemoryCart : NSObject <ABCCart>
 
 @end

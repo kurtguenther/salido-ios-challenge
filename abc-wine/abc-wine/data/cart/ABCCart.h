@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ABCProduct.h"
 
+/**
+ *  Handles persisting a bunch of products that the user intends to buy
+ */
 @protocol ABCCart <NSObject>
 
 /**

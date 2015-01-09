@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "ABCCart.h"
 
+/**
+ *  Returns the cart for the application
+ *  Consumers should not instantiate concrete carts themselves
+ *  But consume them from this Singleton
+ */
 @interface ABCCartFactory : NSObject
 
 +(id<ABCCart>)defaultCart;

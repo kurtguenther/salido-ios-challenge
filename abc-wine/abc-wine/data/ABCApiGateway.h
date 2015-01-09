@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 
+
+/**
+ *  Brokers all the data between the Server and the application
+ *  Consumers should use the shareInstance Singleton
+ */
 @interface ABCApiGateway : NSObject
 
 +(instancetype)sharedInstance;
-
 
 - (void) fetchProductsWithOffset:(NSInteger)offset
                            limit:(NSInteger)limit
