@@ -10,6 +10,7 @@
 #import "ProductViewController.h"
 #import "ABCApiGateway.h"
 #import "ABCProduct.h"
+#import "ABCCartFactory.h"
 #import <SVPullToRefresh/SVPullToRefresh.h>
 #import <EXTScope.h>
 
@@ -94,6 +95,19 @@
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    //Check to see if the cart is empty.  If so, warn the user.
+    if([identifier isEqualToString:@"showCart"]) {
+        if([[ABCCartFactory defaultCart] allProductsInCart].count == 0){
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Cart is empty" message:@"Add some products before going to the cart" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 #pragma mark - Table View

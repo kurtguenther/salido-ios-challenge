@@ -248,7 +248,7 @@
                         <barButtonItem key="backBarButtonItem" title="List" id="jYk-an-VhA"/>
                         <barButtonItem key="rightBarButtonItem" title="Cart" id="MUX-kh-x4g">
                             <connections>
-                                <segue destination="cJH-Al-g18" kind="presentation" id="ZAm-K8-JAV"/>
+                                <segue destination="cJH-Al-g18" kind="presentation" identifier="showCart" id="ZAm-K8-JAV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
