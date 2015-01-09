@@ -21,6 +21,7 @@
 		0F3F26761A5FAF3000905DCA /* ABCMemoryCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3F26751A5FAF3000905DCA /* ABCMemoryCart.m */; };
 		0F3F267A1A5FB76700905DCA /* ABCCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3F26791A5FB76700905DCA /* ABCCartViewController.m */; };
 		0F3F267E1A5FBDAC00905DCA /* ABCCartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3F267D1A5FBDAC00905DCA /* ABCCartTableViewCell.m */; };
+		0F3F26811A6029CD00905DCA /* ABCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3F26801A6029CD00905DCA /* ABCPaymentViewController.m */; };
 		0F787B1F1A5E027900CAE956 /* ABCProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F787B1E1A5E027900CAE956 /* ABCProduct.m */; };
 		E73C6E9C4C9A446F63251E36 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D80DF5A64C18C82E1CBE35FF /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,8 @@
 		0F3F26791A5FB76700905DCA /* ABCCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCCartViewController.m; sourceTree = "<group>"; };
 		0F3F267C1A5FBDAC00905DCA /* ABCCartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCCartTableViewCell.h; sourceTree = "<group>"; };
 		0F3F267D1A5FBDAC00905DCA /* ABCCartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCCartTableViewCell.m; sourceTree = "<group>"; };
+		0F3F267F1A6029CD00905DCA /* ABCPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCPaymentViewController.h; sourceTree = "<group>"; };
+		0F3F26801A6029CD00905DCA /* ABCPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCPaymentViewController.m; sourceTree = "<group>"; };
 		0F787B1D1A5E027900CAE956 /* ABCProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCProduct.h; sourceTree = "<group>"; };
 		0F787B1E1A5E027900CAE956 /* ABCProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCProduct.m; sourceTree = "<group>"; };
 		A250F62ACF8771B2D3183A9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 			children = (
 				0F3F26781A5FB76700905DCA /* ABCCartViewController.h */,
 				0F3F26791A5FB76700905DCA /* ABCCartViewController.m */,
+				0F3F267F1A6029CD00905DCA /* ABCPaymentViewController.h */,
+				0F3F26801A6029CD00905DCA /* ABCPaymentViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F3F26811A6029CD00905DCA /* ABCPaymentViewController.m in Sources */,
 				0F3F26761A5FAF3000905DCA /* ABCMemoryCart.m in Sources */,
 				0F3F267A1A5FB76700905DCA /* ABCCartViewController.m in Sources */,
 				0F0D125B1A5DF47B00B145E0 /* ProductViewController.m in Sources */,

@@ -92,7 +92,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Payment" id="4ou-br-6FL">
                             <connections>
-                                <segue destination="Xv8-r9-sMw" kind="show" id="doQ-Jq-88x"/>
+                                <segue destination="Xv8-r9-sMw" kind="show" identifier="showPayment" id="doQ-Jq-88x"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -102,10 +102,10 @@
             </objects>
             <point key="canvasLocation" x="2424.5" y="-1292.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Payment View Controller-->
         <scene sceneID="E82-Sz-1rC">
             <objects>
-                <viewController id="Xv8-r9-sMw" sceneMemberID="viewController">
+                <viewController id="Xv8-r9-sMw" customClass="ABCPaymentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Jv-9P-MYT"/>
                         <viewControllerLayoutGuide type="bottom" id="Ftm-Dn-T8I"/>
@@ -114,7 +114,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8l-jg-dBZ">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8l-jg-dBZ">
                                 <rect key="frame" x="0.0" y="64" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -129,6 +129,9 @@
                             <constraint firstAttribute="centerY" secondItem="M8l-jg-dBZ" secondAttribute="centerY" constant="-64" id="tkM-pv-sDF"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="jsonView" destination="M8l-jg-dBZ" id="Sjs-92-E6s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FZq-RX-IRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
