@@ -45,7 +45,10 @@
     NSInteger count = [items[product] integerValue];
     cell.nameLabel.text = [NSString stringWithFormat:@"(%ld) %@",(long)count,product.name];
     
+    
+    cell.addButton.tag = indexPath.row;
     [cell.addButton addTarget:self action:@selector(addProduct:) forControlEvents:UIControlEventTouchUpInside];
+    cell.subtractButton.tag = indexPath.row;
     [cell.subtractButton addTarget:self action:@selector(subtractProduct:) forControlEvents:UIControlEventTouchUpInside];
 }
 
