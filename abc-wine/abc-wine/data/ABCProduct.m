@@ -10,4 +10,23 @@
 
 @implementation ABCProduct
 
+- (id)copyWithZone:(NSZone *)zone{
+    ABCProduct* copy = [[[self class] alloc] init];
+    
+    if (copy) {
+        copy.ID = self.ID;
+        copy.name = self.name;
+    }
+    
+    return copy;
+}
+
+- (BOOL)isEqual:(id)object{
+    return [self.ID isEqualToString:[object ID]];
+}
+
+- (NSUInteger)hash{
+    return [self.ID hash];
+}
+
 @end

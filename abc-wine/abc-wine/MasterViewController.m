@@ -36,14 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Setup the navigation bar
-    UIBarButtonItem *cartButton = [[UIBarButtonItem alloc] initWithTitle:@"Cart" style:UIBarButtonItemStylePlain target:self action:@selector(goToCart)];
-    self.navigationItem.rightBarButtonItem = cartButton;
-    
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
-    @weakify(self);
     //Setup the table for infinite scrolling
+    @weakify(self);
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self);
         [[ABCApiGateway sharedInstance] fetchProductsWithOffset:self.productsCache.count limit:10 success:^(NSArray *products) {
@@ -81,18 +77,17 @@
     }];
 }
 
-- (void) goToCart {
-    ;
-}
 
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
+        NSIndexPath *indexPath = sender;
+        ABCProduct* product = self.productsCache[indexPath.row];
+        
+        DetailViewController* controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        controller.product = product;
+
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
@@ -110,29 +105,15 @@
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-            
-        NSError *error = nil;
-        if (![context save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
-}
-
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     ABCProduct* product = self.productsCache[indexPath.row];
     cell.textLabel.text = product.name;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self performSegueWithIdentifier:@"showDetail" sender:indexPath];
+    
 }
 
 @end

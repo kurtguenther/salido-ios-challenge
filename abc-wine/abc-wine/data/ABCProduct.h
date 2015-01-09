@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ABCProduct : NSObject
+@interface ABCProduct : NSObject<NSCopying>
 
+@property (nonatomic, strong) NSString* ID;
 @property (nonatomic, strong) NSString* name;
 
 @end

@@ -50,6 +50,7 @@
         
         for(NSDictionary* item in resp[@"Products"][@"List"]){
             ABCProduct* product = [[ABCProduct alloc] init];
+            product.ID = [NSString stringWithFormat:@"%ld", (long) item[@"Id"]];
             product.name = item[@"Name"];
             [retVal addObject:product];
         }

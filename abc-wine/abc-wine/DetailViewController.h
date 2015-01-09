@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ABCProduct.h"
 
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) id detailItem;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (nonatomic, strong) ABCProduct* product;
+
+@property (nonatomic, strong) IBOutlet UILabel* productName;
+
+
+- (IBAction)addToCart:(id)sender;
 
 @end
 

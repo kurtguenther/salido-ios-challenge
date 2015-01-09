@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "ABCCartFactory.h"
 
 @interface DetailViewController ()
 
@@ -14,33 +15,30 @@
 
 @implementation DetailViewController
 
-#pragma mark - Managing the detail item
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self configureView];
+}
 
-- (void)setDetailItem:(id)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-            
-        // Update the view.
+- (void)setProduct:(ABCProduct *)product {
+    if(_product != product){
+        _product = product;
         [self configureView];
     }
 }
 
 - (void)configureView {
-    // Update the user interface for the detail item.
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
+    self.productName.text = self.product.name;
+}
+
+#pragma mark Actions
+
+- (void)addToCart:(id)sender {
+    if(self.product){
+        [[ABCCartFactory defaultCart] addProduct:self.product quantity:1];
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
