@@ -43,44 +43,43 @@
     @weakify(self);
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self);
-        [[ABCApiGateway sharedInstance] fetchProductsWithOffset:self.productsCache.count limit:30 success:^(NSArray *products) {
-            
-            //Animate because I'm not an feral animal
-            [self.tableView beginUpdates];
-            
-            //Calculate the added index paths
-            NSMutableArray *indexPaths = [NSMutableArray array];
-            NSInteger startingIndex = self.productsCache.count;
-            for (int i = 0; i < products.count; i++) {
-                [indexPaths addObject:[NSIndexPath indexPathForRow:startingIndex++ inSection:0]];
-            }
-            
-            //Add to the backing datasource
-            [self.productsCache addObjectsFromArray:products];
-            
-            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
-            [self.tableView endUpdates];
-            
-            //Stop refresh
-            [self.tableView.infiniteScrollingView stopAnimating];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //TODO
-        }];
+        [self loadProducts];
     }];
     
-    //Load some data
+    //Load the initial data
     self.productsCache = [NSMutableArray array];
     [self.tableView.infiniteScrollingView startAnimating];
-    [[ABCApiGateway sharedInstance] fetchProductsWithOffset:self.productsCache.count limit:30 success:^(NSArray *products) {
-        [self.productsCache addObjectsFromArray:products];
-        [self.tableView.infiniteScrollingView stopAnimating];
-        [self.tableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //TODO;
-    }];
+    [self loadProducts];
 }
 
+/**
+ *  Fetches products from the server.
+ *  Either gets the initial products or fetches more in batches.
+ */
+- (void) loadProducts {
+    [[ABCApiGateway sharedInstance] fetchProductsWithOffset:self.productsCache.count limit:30 success:^(NSArray *products) {
+        //Animate because I'm not an feral animal
+        [self.tableView beginUpdates];
+        
+        //Calculate the added index paths
+        NSMutableArray *indexPaths = [NSMutableArray array];
+        NSInteger startingIndex = self.productsCache.count;
+        for (int i = 0; i < products.count; i++) {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:startingIndex++ inSection:0]];
+        }
+        
+        //Add to the backing datasource
+        [self.productsCache addObjectsFromArray:products];
+        
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView endUpdates];
+        
+        //Stop refresh
+        [self.tableView.infiniteScrollingView stopAnimating];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [[[UIAlertView alloc] initWithTitle:@"Server Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    }];
+}
 
 #pragma mark - Segues
 

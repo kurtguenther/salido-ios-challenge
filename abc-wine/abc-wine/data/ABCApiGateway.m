@@ -42,24 +42,34 @@
                              @"size": @(limit)};
     NSString* requestUrl = [NSString stringWithFormat:@"%@%@", API_BASE_URL, @"/catalog"];
     [manager GET:requestUrl parameters:[self addCommonRequestParameters:params] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* resp = responseObject;
         NSMutableArray* retVal = [NSMutableArray array];
         
-        //TODO check the Status and possible fail
-        
-        NSDictionary* resp = responseObject;
-        
-        for(NSDictionary* item in resp[@"Products"][@"List"]){
-            ABCProduct* product = [[ABCProduct alloc] init];
-            product.ID = [NSString stringWithFormat:@"%ld", (long) [item[@"Id"] integerValue]];
-            product.name = item[@"Name"];
-            [retVal addObject:product];
-        }
-        
-        if(success){
-            success(retVal);
+        //We have not guaranteed success yet.
+        //If the return code is anything but 0 an error has happened
+        //Side note: who uses 200 as a bad response value!?!
+        NSInteger returnCode = [resp[@"Status"][@"ReturnCode"] integerValue];
+        if(returnCode == 0){
+            for(NSDictionary* item in resp[@"Products"][@"List"]){
+                ABCProduct* product = [[ABCProduct alloc] init];
+                product.ID = [NSString stringWithFormat:@"%ld", (long) [item[@"Id"] integerValue]];
+                product.name = item[@"Name"];
+                [retVal addObject:product];
+            }
+            
+            if(success){
+                success(retVal);
+            }
+        } else {
+            NSArray* messages = resp[@"Status"][@"Messages"];
+            NSLog(@"API response error (%ld): %@", (long)returnCode, [messages firstObject]);
+            if(failure){
+                NSError* err = [NSError errorWithDomain:[messages firstObject] code:returnCode userInfo:@{@"messages":messages}];
+                failure(operation, err);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //TODO probably some logging
+        NSLog(@"API failed, error (%ld): %@", [error code], [error localizedDescription]);
         if(failure){
             failure(operation, error);
         }
