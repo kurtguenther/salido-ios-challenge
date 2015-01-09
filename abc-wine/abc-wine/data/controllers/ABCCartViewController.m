@@ -44,6 +44,23 @@
     ABCProduct* product = items.allKeys[indexPath.row];
     NSInteger count = [items[product] integerValue];
     cell.nameLabel.text = [NSString stringWithFormat:@"(%ld) %@",(long)count,product.name];
+    
+    [cell.addButton addTarget:self action:@selector(addProduct:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.subtractButton addTarget:self action:@selector(subtractProduct:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)addProduct:(UIButton*)sender {
+    NSInteger row = sender.tag;
+    ABCProduct* product = [[ABCCartFactory defaultCart] allProductsInCart].allKeys[row];
+    [[ABCCartFactory defaultCart] addProduct:product quantity:1];
+    [self.tableView reloadData];
+}
+
+- (void)subtractProduct:(UIButton*)sender {
+    NSInteger row = sender.tag;
+    ABCProduct* product = [[ABCCartFactory defaultCart] allProductsInCart].allKeys[row];
+    [[ABCCartFactory defaultCart] addProduct:product quantity:-1];
+    [self.tableView reloadData];
 }
 
 

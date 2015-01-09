@@ -12,4 +12,7 @@
 
 @property (nonatomic, strong) IBOutlet UILabel* nameLabel;
 
+@property (nonatomic, strong) IBOutlet UIButton* subtractButton;
+@property (nonatomic, strong) IBOutlet UIButton* addButton;
+
 @end

@@ -73,7 +73,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="addButton" destination="vur-TJ-cvB" id="RBP-I2-hWN"/>
                                     <outlet property="nameLabel" destination="1Nm-cD-YD6" id="ZWJ-os-d4L"/>
+                                    <outlet property="subtractButton" destination="jLr-35-WvJ" id="w46-73-Uv7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
