@@ -37,10 +37,11 @@
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    
     NSDictionary* params = @{@"offset": @(offset),
                              @"size": @(limit)};
-    NSString* url = [NSString stringWithFormat:@"%@%@", API_BASE_URL, @"/catalog"];
-    [manager GET:url parameters:[self addCommonRequestParameters:params] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString* requestUrl = [NSString stringWithFormat:@"%@%@", API_BASE_URL, @"/catalog"];
+    [manager GET:requestUrl parameters:[self addCommonRequestParameters:params] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray* retVal = [NSMutableArray array];
         
         //TODO check the Status and possible fail

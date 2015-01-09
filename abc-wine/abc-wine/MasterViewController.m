@@ -10,6 +10,8 @@
 #import "DetailViewController.h"
 #import "ABCApiGateway.h"
 #import "ABCProduct.h"
+#import <SVPullToRefresh/SVPullToRefresh.h>
+#import <EXTScope.h>
 
 @interface MasterViewController ()
 
@@ -40,9 +42,38 @@
     
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
+    @weakify(self);
+    //Setup the table for infinite scrolling
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        @strongify(self);
+        [[ABCApiGateway sharedInstance] fetchProductsWithOffset:self.productsCache.count limit:10 success:^(NSArray *products) {
+            
+            //Animate because I'm not an feral animal
+            [self.tableView beginUpdates];
+            
+            //Calculate the added index paths
+            NSMutableArray *indexPaths = [NSMutableArray array];
+            NSInteger startingIndex = self.productsCache.count;
+            for (int i = 0; i < products.count; i++) {
+                [indexPaths addObject:[NSIndexPath indexPathForRow:startingIndex++ inSection:0]];
+            }
+            
+            //Add to the backing datasource
+            [self.productsCache addObjectsFromArray:products];
+            
+            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+            [self.tableView endUpdates];
+            
+            //Stop refresh
+            [self.tableView.infiniteScrollingView stopAnimating];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //TODO;
+        }];
+    }];
+    
     //Load some data
     self.productsCache = [NSMutableArray array];
-    [[ABCApiGateway sharedInstance] fetchProductsWithOffset:self.productsCache.count limit:100 success:^(NSArray *products) {
+    [[ABCApiGateway sharedInstance] fetchProductsWithOffset:self.productsCache.count limit:10 success:^(NSArray *products) {
         [self.productsCache addObjectsFromArray:products];
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
