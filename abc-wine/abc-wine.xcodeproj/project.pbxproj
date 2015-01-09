@@ -10,8 +10,8 @@
 		0F0D124F1A5DF47B00B145E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D124E1A5DF47B00B145E0 /* main.m */; };
 		0F0D12521A5DF47B00B145E0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D12511A5DF47B00B145E0 /* AppDelegate.m */; };
 		0F0D12551A5DF47B00B145E0 /* abc_wine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D12531A5DF47B00B145E0 /* abc_wine.xcdatamodeld */; };
-		0F0D12581A5DF47B00B145E0 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D12571A5DF47B00B145E0 /* MasterViewController.m */; };
-		0F0D125B1A5DF47B00B145E0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D125A1A5DF47B00B145E0 /* DetailViewController.m */; };
+		0F0D12581A5DF47B00B145E0 /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D12571A5DF47B00B145E0 /* ProductListViewController.m */; };
+		0F0D125B1A5DF47B00B145E0 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D125A1A5DF47B00B145E0 /* ProductViewController.m */; };
 		0F0D125E1A5DF47B00B145E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F0D125C1A5DF47B00B145E0 /* Main.storyboard */; };
 		0F0D12601A5DF47B00B145E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F0D125F1A5DF47B00B145E0 /* Images.xcassets */; };
 		0F0D12631A5DF47B00B145E0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0D12611A5DF47B00B145E0 /* LaunchScreen.xib */; };
@@ -42,10 +42,10 @@
 		0F0D12501A5DF47B00B145E0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F0D12511A5DF47B00B145E0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0F0D12541A5DF47B00B145E0 /* abc_wine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = abc_wine.xcdatamodel; sourceTree = "<group>"; };
-		0F0D12561A5DF47B00B145E0 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		0F0D12571A5DF47B00B145E0 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		0F0D12591A5DF47B00B145E0 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		0F0D125A1A5DF47B00B145E0 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		0F0D12561A5DF47B00B145E0 /* ProductListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductListViewController.h; sourceTree = "<group>"; };
+		0F0D12571A5DF47B00B145E0 /* ProductListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductListViewController.m; sourceTree = "<group>"; };
+		0F0D12591A5DF47B00B145E0 /* ProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductViewController.h; sourceTree = "<group>"; };
+		0F0D125A1A5DF47B00B145E0 /* ProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductViewController.m; sourceTree = "<group>"; };
 		0F0D125D1A5DF47B00B145E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F0D125F1A5DF47B00B145E0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0F0D12621A5DF47B00B145E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -115,10 +115,10 @@
 				0F787B1C1A5DFED900CAE956 /* data */,
 				0F0D12501A5DF47B00B145E0 /* AppDelegate.h */,
 				0F0D12511A5DF47B00B145E0 /* AppDelegate.m */,
-				0F0D12561A5DF47B00B145E0 /* MasterViewController.h */,
-				0F0D12571A5DF47B00B145E0 /* MasterViewController.m */,
-				0F0D12591A5DF47B00B145E0 /* DetailViewController.h */,
-				0F0D125A1A5DF47B00B145E0 /* DetailViewController.m */,
+				0F0D12561A5DF47B00B145E0 /* ProductListViewController.h */,
+				0F0D12571A5DF47B00B145E0 /* ProductListViewController.m */,
+				0F0D12591A5DF47B00B145E0 /* ProductViewController.h */,
+				0F0D125A1A5DF47B00B145E0 /* ProductViewController.m */,
 				0F0D125C1A5DF47B00B145E0 /* Main.storyboard */,
 				0F0D125F1A5DF47B00B145E0 /* Images.xcassets */,
 				0F0D12611A5DF47B00B145E0 /* LaunchScreen.xib */,
@@ -353,8 +353,8 @@
 			files = (
 				0F3F26761A5FAF3000905DCA /* ABCMemoryCart.m in Sources */,
 				0F3F267A1A5FB76700905DCA /* ABCCartViewController.m in Sources */,
-				0F0D125B1A5DF47B00B145E0 /* DetailViewController.m in Sources */,
-				0F0D12581A5DF47B00B145E0 /* MasterViewController.m in Sources */,
+				0F0D125B1A5DF47B00B145E0 /* ProductViewController.m in Sources */,
+				0F0D12581A5DF47B00B145E0 /* ProductListViewController.m in Sources */,
 				0F0D12551A5DF47B00B145E0 /* abc_wine.xcdatamodeld in Sources */,
 				0F3F26731A5FAE9F00905DCA /* ABCCartFactory.m in Sources */,
 				0F787B1F1A5E027900CAE956 /* ABCProduct.m in Sources */,

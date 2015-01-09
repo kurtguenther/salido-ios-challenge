@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ABCProduct.h"
 
-@interface DetailViewController : UIViewController
+@interface ProductViewController : UIViewController
 
 @property (nonatomic, strong) ABCProduct* product;
 

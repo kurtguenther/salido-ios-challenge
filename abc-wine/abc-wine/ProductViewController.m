@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Salido. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "ProductViewController.h"
 #import "ABCCartFactory.h"
 
-@interface DetailViewController ()
+@interface ProductViewController ()
 
 @end
 
-@implementation DetailViewController
+@implementation ProductViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
