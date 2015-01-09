@@ -1,45 +1,47 @@
-# Challenge for iOS Engineer
-To better assess a candidates development skills, we provide this following challenge.  You have as much time as you'd like (though we ask that you not spend more than a few hours).
+# Installation
+You should be able to simply clone this repository and then install the pods.  See <http://cocoapods.org> for more details.
 
-## Submission Instructions
-1. First, fork this project on Github.  You will need to create an account if you don't already have one.
-1. Next, complete the project as described below within your fork.
-1. Finally, push all of your changes to your fork on Github and submit a pull request.  You should also email the appropriate address at Salido and your recruiter to let them know you have submitted a solution.  Make sure to include your Github username in your email (so we can match people with pull requests).
-1. Include in your README any assumptions your code is based on, instructions for running the app (if any), or any other information you want to communicate.
+# Application overview
+Whenever I dig into a codebase I always think there should be some light summary of how the application works - code + architecturally wise, but I usually don't find one.  
 
-## Alternate Submission Instructions (if you don't want to publicize completing the challenge)
-1. Clone the repository.
-1. Next, complete your project as described below within your local repository.
-1. Email a patch file to the appropriate address at Salido and your recruiter to let them know you have submitted a solution.
+This is probably more verbose than I'd normally put for an application. 
 
-## Project Description
-Imagine that Salido has just acquired a new company called ABC Wine Distributors (ABC WD) for the purpose of selling wines through Salido's existing customer-facing mobile app.
+*I also included some notes about my design choices in italics*
 
-Your job is to prototype a Catalog+Cart module for iOS using ABC WD's API found here: https://api.wine.com You will need to sign up for an account to obtain your own API key.  Your application should be easy to set up, run on either an iPhone or iPad, and target a base SDK of iOS 8.0 or later.  It should not require any for-pay software, but open source 3rd party frameworks are allowed.  It does not need to support screen rotation.
+## Data Access
 
-Here's what your application must do:
+All data access is performed via the **ABCApiGateway** class.  The Gateway is accessed via the `sharedInstance` singleton method.
 
-1. List a set of products from the API.
-1. View a product and any relevant details.
-1. Add a product to a shopping cart.
-1. Remove a product from a shopping cart.
-1. Update the quantity on a product in a shopping cart.
-1. Allow the user to switch between the products view and the shopping cart.
-1. Have a "Proceed to Payment" button on cart which validates the shopping cart and moves to a payment screen.
-1. Payment screen shows a raw JSON dump of the shopping cart.
-1. Handle any API/Cart validation errors.
+The ApiGateway is basically a wrapper around some AFNetworking operations.
 
-Your application does not need to:
+*I could have chosen for the Gateway to be abstract, allowing us to swap out concrete implementations - like loading from a local DB or another API altogether.  But that seemed like overkill for this scenario*
 
-1. Handle authentication or authorization.
-1. Be aesthetically pleasing.
-1. Handle processing a payment or any further checkout functionality.
+## Cart
 
-## Evaluation
-Evaluation of your submission will be based on the following criteria. 
+The cart is a peristed set items that the user wants to buy.  It contains (at a minimum) the quantity of each item.
 
-1. Did your application fulfill the basic requirements?
-1. Did you document the method for setting up and running your application?
-1. Did you follow the instructions for submission?
+There is an abstract **ABCCart** protocol which defines the methods that all carts must provide.
 
-Additionally, reviewers will attempt to assess your familiarity with standard libraries. Reviewers will also assess your experience with object-oriented programming based on how you've structured your submission. Both your code and the technical (not aesthetic) quality of the running application will be evaluated.
+The only concrete implementation for this is the **ABCMemoryCart** protocol, though it is easy to add additional ones.
+
+*It seemed prudent to do this here.  I provided the simple in-memory example, but it could be easily extended to provide a CoreData (or User Defaults for the lazy) persistence that will survive between runs of the application.  Or even it could be stored on the server to provide cart analytics*
+
+*Additionally, this is probably the most controversial of my decisions here, but I could have implemented another Data Object for a Cart Item.  With gifting and discounts and such, that would alomst certainly have to be done*
+
+*Also it's convenient that I store the Product object => Quantity (so I retain all the titles, etc without going back to the server) but in a more complex scenario I would just keep Product ID as the key*
+
+## Views and Controllers
+
+The application is a basic SplitViewController with a **ABCProductListViewController** showing all the items and an **ABCProductViewController** showing the details.
+
+We use Storyboards for expediency.
+
+## Dependencies
+
+* __libextobjc__ - provides easy access to @weakify and @strongify, which IMO, everyone should be using to prevent retain cycles
+* __SVPullToRefresh__ - provides the infinite scrolling
+* __AFNetworking__ - for the usual
+
+## Misc
+
+* I didn't have time, but normally I set up an application wide Error Feedback View so that presenting errors is consistent across the app.  I find that to be super useful as the app gets more ungainly.
